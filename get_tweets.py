@@ -1,6 +1,7 @@
 import re
 import tweepy
 from tweepy import OAuthHandler
+from textblob import TextBlob
 
 
 class TwitterClient(object):
@@ -23,20 +24,78 @@ class TwitterClient(object):
         except:
             print("Error: Authentication failed.")
 
-    def buildTestSet(self, search_keyword):
-        try:
-            tweets_fetched = self.api.GetSearch(search_keyword, count=100)
-            print("Fetched " + str(len(tweets_fetched)) + " tweets for the term " + search_keyword)
-            return [{"text":status.text, "label":None} for status in tweets_fetched]
-        except:
-            print("Unfortunately, something went wrong..")
-            return None
+    # Function to classify sentiment using TextBlob
+    def get_tweet_sentiment(self, tweet): 
+        # Create TextBlob object of passed tweet text 
+        analysis = TextBlob(tweet) 
+        # Set sentiment 
+        if analysis.sentiment.polarity > 0: 
+            return 'positive'
+        elif analysis.sentiment.polarity == 0: 
+            return 'neutral'
+        else: 
+            return 'negative'
+
+    # Function to get tweets
+    def get_tweets(self, query, count = 10): 
+        # Empty list to store parsed tweets 
+        tweets = [] 
+  
+        try: 
+            # Call Twitter API to fetch tweets 
+            fetched_tweets = self.api.search(q = query, count = count) 
+  
+            # Parsing tweets one by one 
+            for tweet in fetched_tweets: 
+                # Empty dictionary to store required params of a tweet 
+                parsed_tweet = {} 
+  
+                # Saving text of tweet 
+                parsed_tweet['text'] = tweet.text 
+                # Saving sentiment of tweet 
+                parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text) 
+  
+                # Appending parsed tweet to tweets list 
+                if tweet.retweet_count > 0: 
+                    # If tweet has retweets, ensure that it is appended only once 
+                    if parsed_tweet not in tweets: 
+                        tweets.append(parsed_tweet) 
+                else: 
+                    tweets.append(parsed_tweet) 
+  
+            # Return parsed tweets 
+            return tweets 
+  
+        except tweepy.TweepError as e: 
+            # Print error (if any) 
+            print("Error : " + str(e))
 
 def main():
     api = TwitterClient()
-    search_term = input("Enter a search word:")
-    testDataSet = api.buildTestSet(search_term)
-    print(testDataSet[0:4])
+    tweets = api.get_tweets(query = 'Tom Brady', count = 200) 
+
+    # Picking positive tweets from tweets 
+    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive'] 
+
+    # Percentage of positive tweets 
+    print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets))) 
+
+    # Picking negative tweets from tweets 
+    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative'] 
+
+    # Percentage of negative tweets 
+    print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets))) 
+  
+    # Printing first 5 positive tweets 
+    print("\n\nPositive tweets:") 
+    for tweet in ptweets[:10]: 
+        print(tweet['text']) 
+  
+    # Printing first 5 negative tweets 
+    print("\n\nNegative tweets:") 
+    for tweet in ntweets[:10]: 
+        print(tweet['text']) 
+    
 
 if __name__ == '__main__':
     main()
