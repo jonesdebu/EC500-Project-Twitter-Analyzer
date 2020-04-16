@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import flask_restful
-from get_tweets import TwitterClient
+from get_tweet_sentiment import TwitterClient
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
