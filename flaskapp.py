@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import flask_restful
 from get_tweet_sentiment import TwitterClient
+from collections import Counter, defaultdict
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -18,11 +19,11 @@ def hastag_tweets():
         api = TwitterClient()
         form_text = request.form["text"]    # get form text
         search_term = form_text.upper()  # process form text
-        data_set = api.buildTestSet(search_term)
+        data_set = api.get_tweets(search_term)
 
         return render_template(
-        'tweet_results.html',
-        response = data_set
+        'tweet_results.html', response=data_set
+        #response = data_set
         )
 
 app.run()
