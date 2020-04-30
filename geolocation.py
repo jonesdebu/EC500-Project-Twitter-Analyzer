@@ -7,7 +7,7 @@ from geopy.geocoders import Nominatim
 import gmplot
 
 
-geolocator = Nominatim()
+geolocator = Nominatim(user_agent='jonesde@bu.edu')
 
 #Enter Twitter API Key information
 consumer_key = 'Ij5a4mBmBvNp4aiZ7F8uPhAWi'
@@ -50,15 +50,21 @@ class listener(StreamListener):
 
 def geolocation(keyword):
     try:
+        print("auth")
         auth = OAuthHandler(consumer_key, consumer_secret)
-        auth.set_access_token(access_token, access_secret)
+        print("1")
+        auth.set_access_token(access_token, access_token_secret)
+        print("2")
+        print("auth working")
         twitterStream = Stream(auth, listener())
+        print("TwitterStream init")
         twitterStream.filter(track=[keyword])
         gmap = gmplot.GoogleMapPlotter(30, 0, 3)
         gmap.heatmap(coordinates['latitude'], coordinates['longitude'], radius=20)
         gmap.apikey = "AIzaSyAkNVgQPMhvAd4rh0Po4ckiwwSTSCCMwhE"
+        print("gmap config")
         gmap.draw("heatmap_result.html")
     except:
         print("error")
 
-geolocation("Boston")
+#geolocation("Boston")

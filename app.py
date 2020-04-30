@@ -4,6 +4,8 @@ from get_tweet_sentiment import TwitterClient
 from collections import Counter, defaultdict
 from geolocation import listener
 from geolocation import geolocation
+import os
+import shutil
 
 
 app = Flask(__name__)
@@ -30,6 +32,8 @@ def hastag_tweets():
             form_text = request.form["text"]    # get form text
             search_term = form_text.upper()  # process form text
             data_set = api.get_tweets(search_term, 10)
+            geolocation(search_term)
+            shutil.move('heatmap_result.html', 'templates')
             return render_template(
             'tweet_results.html', response=data_set
             #response = data_set
@@ -37,12 +41,16 @@ def hastag_tweets():
     except:
         print('Function: hashtag_tweets failed to run')
 
-@app.route('/heatmap', methods=['GET'])
+@app.route('/heatmap_result', methods=['GET'])
 def show_geo():
         try:
-            geolocation(seach_term)
+
+            return render_template(
+            'heatmap_result.html'
+            )
         except:
             print('Failed to generate heatmap')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
