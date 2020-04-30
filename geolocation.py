@@ -10,10 +10,10 @@ import gmplot
 geolocator = Nominatim()
 
 #Enter Twitter API Key information
-consumer_key = ''
-consumer_secret = ''
-access_token = ''
-access_secret = ''
+consumer_key = 'Ij5a4mBmBvNp4aiZ7F8uPhAWi'
+consumer_secret = 'DtrH2IGyq6KMds9zXzvsefd2knSee7K9xKqOdchvtTGuphCP2z'
+access_token = '931158103831216128-T4nbPvu1irazZ0t49MkZZqjT2xmQDSP'
+access_token_secret = 'y7WQZkM9jsiuQtmpopOc7rNctN910utOE3gDzyJaMYIgX'
 
 coordinates = {'latitude': [], 'longitude': []}
 
@@ -56,7 +56,7 @@ def geolocation(keyword):
         twitterStream.filter(track=[keyword])
         gmap = gmplot.GoogleMapPlotter(30, 0, 3)
         gmap.heatmap(coordinates['latitude'], coordinates['longitude'], radius=20)
-        gmap.apikey = "your google api key"
+        gmap.apikey = "AIzaSyAkNVgQPMhvAd4rh0Po4ckiwwSTSCCMwhE"
         gmap.draw("heatmap_result.html")
     except:
         print("error")
