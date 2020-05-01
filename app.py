@@ -62,7 +62,13 @@ def hastag_tweets():
 
 
             geolocation(search_term)
-            shutil.move('heatmap_result.html', 'templates') #need to add logic for case where heatmap_result.html alredy exists
+
+            if os.path.exists('templates/heatmap_result.html'):
+                os.remove('templates/heatmap_result.html')
+                shutil.move('heatmap_result.html', 'templates')
+
+            else:
+                shutil.move('heatmap_result.html', 'templates') #need to add logic for case where heatmap_result.html alredy exists
 
             return render_template(
             'chart.html', response=data_set, values=values, labels=labels, legend=legend
