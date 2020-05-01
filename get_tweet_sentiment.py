@@ -25,10 +25,10 @@ class TwitterClient(object):
             print("Error: Authentication failed.")
 
     # Function to classify sentiment using TextBlob
-    def get_tweet_sentiment(self, tweet): 
-        # Create TextBlob object of passed tweet text 
-        analysis = TextBlob(tweet) 
-        # Set sentiment 
+    def get_tweet_sentiment(self, tweet):  
+
+        analysis = TextBlob(tweet)  
+
         if analysis.sentiment.polarity > 0: 
             return 'positive'
         elif analysis.sentiment.polarity == 0: 
@@ -38,24 +38,17 @@ class TwitterClient(object):
 
     # Function to get tweets
     def get_tweets(self, query, count = 10): 
-        # Empty list to store parsed tweets 
+
         tweets = [] 
-  
+
         try: 
-            # Call Twitter API to fetch tweets 
             fetched_tweets = self.api.search(q = query, count = count) 
-  
-            # Parsing tweets one by one 
+
             for tweet in fetched_tweets: 
-                # Empty dictionary to store required params of a tweet 
                 parsed_tweet = {} 
-  
-                # Saving text of tweet 
-                parsed_tweet['text'] = tweet.text 
-                # Saving sentiment of tweet 
+                parsed_tweet['text'] = tweet.text  
                 parsed_tweet['sentiment'] = self.get_tweet_sentiment(tweet.text) 
-  
-                # Appending parsed tweet to tweets list 
+
                 if tweet.retweet_count > 0: 
                     # If tweet has retweets, ensure that it is appended only once 
                     if parsed_tweet not in tweets: 
@@ -63,7 +56,6 @@ class TwitterClient(object):
                 else: 
                     tweets.append(parsed_tweet) 
   
-            # Return parsed tweets 
             return tweets 
   
         except tweepy.TweepError as e: 
