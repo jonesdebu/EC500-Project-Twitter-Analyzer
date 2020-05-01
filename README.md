@@ -19,6 +19,8 @@ Our application analyzes sentiment of Tweets using TextBlob, a natural language 
 
 ### Front-End Data Visualization
 
+## How to Run This Code
+
 ## References
 * https://towardsdatascience.com/extracting-twitter-data-pre-processing-and-sentiment-analysis-using-python-3-0-7192bd8b47cf 
 * https://www.toptal.com/python/twitter-data-mining-using-python
