@@ -27,6 +27,7 @@ The `get_tweet_sentiment.py` file authorizes a Twitter API client, fetches tweet
 ## How to Run This Code
 
 ## References
+* * https://www.freecodecamp.org/news/how-to-build-a-twitter-sentiments-analyzer-in-python-using-textblob-948e1e8aae14/ 
+* https://www.geeksforgeeks.org/twitter-sentiment-analysis-using-python/
 * https://towardsdatascience.com/extracting-twitter-data-pre-processing-and-sentiment-analysis-using-python-3-0-7192bd8b47cf 
 * https://www.toptal.com/python/twitter-data-mining-using-python
-* https://www.freecodecamp.org/news/how-to-build-a-twitter-sentiments-analyzer-in-python-using-textblob-948e1e8aae14/
