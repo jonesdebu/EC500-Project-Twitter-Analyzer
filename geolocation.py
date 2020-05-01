@@ -22,7 +22,7 @@ class listener(StreamListener):
     def __init__(self):
         super().__init__()
         self.counter = 0
-        self.limit = 20
+        self.limit = 10
 
     def on_data(self, data):
         try:
