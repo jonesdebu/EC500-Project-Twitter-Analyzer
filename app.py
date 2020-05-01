@@ -15,7 +15,7 @@ api = TwitterClient()   #so api can be used in multiple functions without creati
 global search_term
 global data_set
 
-search_term = 'Twitter' #default search term (quick solution to use in sentiment and geolocation)
+search_term = 'Twitter' #default search term
 data_set = []
 
 @app.route('/', methods=['GET'])
@@ -68,11 +68,9 @@ def hastag_tweets():
                 shutil.move('heatmap_result.html', 'templates')
 
             else:
-                shutil.move('heatmap_result.html', 'templates') #need to add logic for case where heatmap_result.html alredy exists
-
+                shutil.move('heatmap_result.html', 'templates')
             return render_template(
             'chart.html', response=data_set, values=values, labels=labels, legend=legend
-            #response = data_set
             )
     except:
         print('Function: hashtag_tweets failed to run')
