@@ -13,13 +13,10 @@ class TwitterClient(object):
         access_token = '931158103831216128-T4nbPvu1irazZ0t49MkZZqjT2xmQDSP'
         access_token_secret = 'y7WQZkM9jsiuQtmpopOc7rNctN910utOE3gDzyJaMYIgX'
 
-    # Attempt authentication
+    # Authentication
         try:
-            # Create OAuthHandler object
             self.auth = OAuthHandler(consumer_key, consumer_secret)
-            # Set access token and secret
             self.auth.set_access_token(access_token, access_token_secret)
-            # Create tweepy API object to fetch tweets
             self.api = tweepy.API(self.auth)
         except:
             print("Error: Authentication failed.")
