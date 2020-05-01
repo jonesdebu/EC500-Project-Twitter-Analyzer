@@ -12,9 +12,7 @@ The goal of this project is to use machine learning and the Twitter API to deter
 ## Software Architecture & Tech Stack
 This application is divided into three components: the geolocation API (`geolocation.py`), tweet sentiment analyzer (`get_tweet_sentiment.py`), and front-end visualization (`app.py`).
 ### Geolocation API
-- The Geolocation API can obtain the location distribution of users who post Twitter containing keywords. 
-- Search for tweets containing keyword to get the addresses of these tweet users. Use geopy to convert the address into latitude and longitude and store it in the list. Use gmplot to mark the latitude and longitude coordinates on the Google map in the form of a heat map. The red areas on the map indicate that there are many people who post Twitter containing keywords.
-- For example, using the keyword BREXIT, we can see on the map that the publisher lives mainly in the UK.
+The Geolocation API can obtain the location distribution of users who post Twitter containing keywords. Search for tweets containing keyword to get the addresses of these tweet users. Use geopy to convert the address into latitude and longitude and store it in the list. Use gmplot to mark the latitude and longitude coordinates on the Google map in the form of a heat map. The red areas on the map indicate that there are many people who post Twitter containing keywords. For example, using the keyword BREXIT, we can see on the map that the publisher lives mainly in the UK.
 <p align="center">   
 <img src="https://github.com/jonesdebu/EC500-Project-Twitter-Analyzer/blob/master/BREXIT.png" /> 
 </p> 
