@@ -56,33 +56,76 @@ class TwitterClient(object):
             return tweets 
   
         except tweepy.TweepError as e: 
-            # Print error (if any) 
             print("Error: " + str(e))
+
+    # Function to get positive tweets
+    def get_positive_tweets(self, tweets):
+
+        positive_tweets = []
+
+        for tweet in tweets:
+            if tweet['sentiment'] == 'positive':
+                positive_tweets.append(tweet)
+        
+        return positive_tweets
+
+    # Function to get negative tweets
+    def get_negative_tweets(self, tweets):
+
+        negative_tweets = []
+
+        for tweet in tweets:
+            if tweet['sentiment'] == 'negative':
+                negative_tweets.append(tweet)
+        
+        return negative_tweets
+
+    # Function to get neutral tweets
+    def get_neutral_tweets(self, tweets):
+
+        neutral_tweets = []
+
+        for tweet in tweets:
+            if tweet['sentiment'] == 'neutral':
+                neutral_tweets.append(tweet)
+        
+        return neutral_tweets
 
 def main():
     api = TwitterClient()
-    tweets = api.get_tweets(query = 'Tom Brady', count = 200) 
+    tweets = api.get_tweets(query = 'Tom Brady', count = 200)
 
-    # Picking positive tweets from tweets 
-    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive'] 
+    # Get positive tweets
+    positive_tweets = api.get_positive_tweets(tweets) 
 
     # Percentage of positive tweets 
-    print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets))) 
+    print("Positive tweets percentage: {} %".format(100*len(positive_tweets)/len(tweets))) 
 
-    # Picking negative tweets from tweets 
-    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative'] 
+    # Get negative tweets 
+    negative_tweets = api.get_negative_tweets(tweets)
 
     # Percentage of negative tweets 
-    print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets))) 
+    print("Negative tweets percentage: {} %".format(100*len(negative_tweets)/len(tweets)))
+
+    # Get neutral tweets 
+    neutral_tweets = api.get_neutral_tweets(tweets)
+
+    # Percentage of neutral tweets 
+    print("Neutral tweets percentage: {} %".format(100*len(neutral_tweets)/len(tweets)))  
   
     # Printing first 5 positive tweets 
     print("\n\nPositive tweets:") 
-    for tweet in ptweets[:10]: 
+    for tweet in positive_tweets[:10]: 
         print(tweet['text']) 
   
     # Printing first 5 negative tweets 
     print("\n\nNegative tweets:") 
-    for tweet in ntweets[:10]: 
+    for tweet in negative_tweets[:10]: 
+        print(tweet['text'])
+
+     # Printing first 5 neutral tweets 
+    print("\n\nNeutral tweets:") 
+    for tweet in neutral_tweets[:10]: 
         print(tweet['text']) 
     
 
