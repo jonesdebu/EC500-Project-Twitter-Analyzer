@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import flask_restful
-from get_tweet_sentiment import TwitterClient
+from sentiment import TwitterClient
 from collections import Counter, defaultdict
 from geolocation import listener
 from geolocation import geolocation
