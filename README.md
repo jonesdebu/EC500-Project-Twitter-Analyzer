@@ -14,6 +14,10 @@ This application is divided into three components: the geolocation API (`geoloca
 ### Geolocation API
 - The Geolocation API can obtain the location distribution of users who post Twitter containing keywords. 
 - Search for tweets containing keyword to get the addresses of these tweet users. Use geopy to convert the address into latitude and longitude and store it in the list. Use gmplot to mark the latitude and longitude coordinates on the Google map in the form of a heat map. The red areas on the map indicate that there are many people who post Twitter containing keywords.
+- For example, using the keyword BREXIT, we can see on the map that the publisher lives mainly in the UK.
+<p align="center">   
+<img src="https://github.com/jonesdebu/EC500-Project-Twitter-Analyzer/blob/master/BREXIT.png" /> 
+</p> 
 
 ### Tweet Sentiment Analysis
 Our application analyzes sentiment of Tweets using TextBlob, a natural language processing (NLP) library for processing textual data. It assigns the text a polarity: greater than zero means the sentiment is positive, equal to zero means neutral, and less than zero is negative. We chose this library because it's simple and easy to use for basic sentiment analysis and does not require building test and training data with our own machine learning algorithm. 
