@@ -23,12 +23,17 @@ Our application analyzes sentiment of Tweets using TextBlob, a natural language 
 The `get_tweet_sentiment.py` file authorizes a Twitter API client, fetches tweets for the input search word using the Twitter API, and then determines each tweet's sentiment as positive, negative, or neutral.
 
 ### Front-End Data Visualization
+Enter the keywords you want to search on the get_tweets webpage, click the button, and after waiting for a while, some of the tweets containing keywords will be displayed on the refreshed page, and the bar graphs of the acquired tweets indicating your mood.
+<p align="center">   
+<img src="https://github.com/jonesdebu/EC500-Project-Twitter-Analyzer/blob/master/get_tweets.png" /> 
+</p> 
 
 ## How to Run This Code
 1. Fire up your local terminal and type `git clone https://github.com/jonesdebu/EC500-Project-Twitter-Analyzer.git`.
 2. Type `python3 app.py` to run the application.
 3. Navigate to local host `http://127.0.0.1:5000/`.
 4. Add `/get_tweets` in your browser bar and enter search words to generate data visualization.
+5. Enter `http://127.0.0.1:5000/heatmap` to get the generated heat map
 
 ## References
 * https://www.freecodecamp.org/news/how-to-build-a-twitter-sentiments-analyzer-in-python-using-textblob-948e1e8aae14/ 
